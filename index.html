@@ -4,91 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مفاجأة خاصة جداً</title>
-    <style>
-        body, html {
-            margin: 0; padding: 0;
-            min-height: 100%;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #ffeef2;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+        <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap');
 
-        /* شاشة المؤقت */
-        #timer-screen {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #d63384;
-            background-color: #ffeef2;
-            position: relative;
-            z-index: 1; /* جعل المؤقت في المقدمة */
-        }
+    body, html {
+        margin: 0; padding: 0; min-height: 100vh;
+        font-family: 'Cairo', sans-serif;
+        background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
+        overflow-x: hidden;
+        color: #4a4a4a;
+    }
 
-        #countdown { 
-            font-size: 3.5rem; 
-            font-weight: bold; 
-            margin-top: 20px;
-        }
+    #timer-screen {
+        height: 100vh; display: flex; flex-direction: column;
+        justify-content: center; align-items: center; text-align: center;
+    }
 
-        /* تأثير الستارة */
-        .curtain-part {
-            position: fixed;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(45deg, #ffafbd, #ffc3a0);
-            z-index: -1; /* مخفية خلف المؤقت في البداية */
-            transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
-            box-shadow: 0 0 50px rgba(0,0,0,0.2);
-        }
-        #left-curtain { left: 0; }
-        #right-curtain { right: 0; }
+    #countdown { 
+        font-size: 4rem; font-weight: 700; color: #ff4d6d;
+        text-shadow: 2px 4px 10px rgba(255, 77, 109, 0.2);
+    }
 
-        /* عند تفعيل الستارة تصبح في المقدمة ثم تفتح */
-        .start-curtain #left-curtain, .start-curtain #right-curtain {
-            z-index: 9999;
-        }
-        .open #left-curtain { transform: translateX(-100%); }
-        .open #right-curtain { transform: translateX(100%); }
+    #content-screen {
+        display: none; flex-direction: column; align-items: center;
+        padding: 60px 15px; width: 100%; box-sizing: border-box;
+    }
 
-        /* شاشة المحتوى */
-        #content-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 15px;
-            background: linear-gradient(180deg, #ffeef2, #ffafbd);
-            min-height: 100vh;
-            width: 100%;
-            box-sizing: border-box;
-        }
+    .message {
+        width: 90%; max-width: 600px; background: #ffffff;
+        padding: 25px; margin-bottom: 25px; border-radius: 25px;
+        text-align: center; box-shadow: 0 10px 30px rgba(255, 77, 109, 0.1);
+        opacity: 0; transform: translateY(30px); transition: 0.8s ease-out;
+    }
 
-        .message {
-            width: 90%;
-            max-width: 550px;
-            font-size: 1.3rem;
-            color: #4a4a4a;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 25px;
-            border-radius: 25px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
+    .message.show { opacity: 1; transform: translateY(0); }
 
-        .message.show { opacity: 1; transform: translateY(0); }
+    /* تنسيق الشعر والدعاء */
+    #msg17, #msg18, #msg20 {
+        white-space: pre-line; /* عشان يضلوا تحت بعض */
+        line-height: 2.2;
+        font-family: 'Amiri', serif;
+    }
 
-        #msg17 { text-align: right; white-space: pre-wrap; font-size: 1.1rem; border-right: 5px solid #ff4d6d; }
-        .heart { font-size: 60px; animation: beat 1s infinite; margin-bottom: 30px; }
-        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-    </style>
+    .heart { font-size: 60px; color: #ff4d6d; animation: beat 1.2s infinite; }
+    @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    #msg18 {
+    background: #fff0f3; /* هاد اللون هو الزهري الفاتح الراقي */
+    border: 2px solid #ffb3c1; /* إطار زهري ناعم حول القصيدة */
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #590d22; /* لون الخط أحمر غامق فخم */
+    line-height: 2.2;
+    white-space: pre-line;
+    padding: 35px;
+    border-radius: 30px;
+}
+
+</style>
+
 </head>
 <body id="main-body">
 
@@ -103,6 +77,7 @@
 
     <div id="content-screen">
         <div class="heart">❤️</div>
+        <div class="message" id="msg0">حبيت اكون اول حدا بحكيلك🥺💗</div>
         <div class="message" id="msg1">كل عام وانتي عيدي 🥺💓</div>
         <div class="message" id="msg2">كل عام وانتي عمري 🥺💓</div>
         <div class="message" id="msg3">كل عام وانتي في قلبي 🥺💓</div>
@@ -117,7 +92,8 @@
         <div class="message" id="msg13">كل عام وانتي اعشقك اكثر واكثر 🥺💓</div>
         <div class="message" id="msg14">كل عام وانتي سالمة 🥺💓</div>
         <div class="message" id="msg15">كل عام وانتي وانتي معي 🥺💓</div>
-        <div class="message" id="msg16">بعرف ممكن تكون بسيطة شوي بس انه والله حاب اهديكي اكثر من موقع او صورة او فيديو بس انه مو قادر 😔 بس ان شاء الله يارب انه بقدر بالمستقبل وبعرف انه الي فترة بزعلك كثير بس والله العظيم ما بكون قاصد راح تسالي حالك ليش بحكي هيك بحكي عشان زعلتك الهدية هاي من هون راح تبلش</div>
+        <div class="message" id="msg16">اسف عشان الي فترة بزعلك كثير والله العظيم قد ما احكي انه بضل ندمان ومو عارف مالني والله العظيم ما بحب اشوفك زعلانه راح تحكي انه ليش هالحكي لانه الي يومين ثلاث بزعلك 😔😔 بس والله اسف يا قلبي
+        🥺🥺🥺🥺🥺🥺🥺🥺</div>
         <div class="message" id="msg17">​إلى من سرقت قلبي بابتسامتها، وإلى من جعلت لأيامي معنىً لم أعرفه من قبل..
 إلى تلك الروح التي تسكنني، وتشاركني كل نبضة، وكل شهيق وزفير.
 كل عام وأنتِ النبض الذي يسكن صدري، والروح التي تمدني بالحياة والقوة.
@@ -148,55 +124,103 @@
 أحبكِ لأنكِ أنتِ، ولأنني معكِ أكون النسخة الأجمل والأصدق من نفسي.
 فكوني دائماً بخير، لأن خيري مرتبط بابتسامتكِ، وعيدي يبدأ من عينيكِ.
 كل عام وأنتِ حبيبتي، وكل عام وأنتِ لي كل شيء في هذا الوجود.</div>
+<div class="message" id="msg18" style="white-space: pre-line; text-align: center; line-height: 2.5;">
+أيا مَن جَمالُكِ فاقَ الخَيالا ** وَزادَ النُّجومَ بَهاءً وَهالا <br>
+سَبَيتِ الفُؤادَ بِرِمشٍ كَحيلٍ ** وَثَغرٍ يَبُثُّ العُطورَ الزُّلالا <br>
+وَجَهنٌ يُضيءُ كَبَدرِ التَّمامِ ** وَقَدٍّ رَشيقٍ يَسُرُّ المَجالا <br>
+عُيونُكِ بَحرٌ غَريقٌ هَواهُ ** صَفائُكِ مِثلُ النَّدى في الدَّلالا <br>
+جَبينُكِ نُورٌ لَهُ تَنحَني ** جَميعُ الجَميلاتِ، مَهما تَعالى <br>
+كَلامُكِ لَحنٌ يُداوي الجُروحَ ** وَيَملأُ رُوحي رِضاً وَابتهالا <br>
+جَمالُكِ آيَةُ رَبِّ الهَوى ** تَبارَكَ مَن صاغَهُ وَاسْتَكالا <br>
+أَنا في هَواكِ غَريقٌ صَريعٌ ** وَقَلبي لِغَيرِكِ لَن يَستَحالا <br>
+كَتَبتُ اسمَكِ في عُرُوقي دَماً ** وَصِرتِ لِعَيني هُدىً وَضَلالا <br>
+عِشقُكِ قَد غَلغَلَ في الحَشا ** وَأَصبَحَ في الرُّوحِ كالشَّمسِ شالاً <br>
+إذا ما ظَهَرتِ اِختَفى الكُلُّ صَمتاً ** كَأَنَّكِ كَوكَبُ حُسنٍ هَلالا <br>
+أَمُوتُ وَأَحيا بِحُبِّكِ كُلَّ ** أوانٍ، وَلَن أَستَجيدَ البَديلا <br>
+وَرَبِّ العَوالِمِ أنتِ المَلاكُ ** وَأنتِ لِقَلبي اِنطِفاءُ الغَليلا <br>
+لَكِ الحُبُّ يا مُنيَةَ الروحِ بَاقٍ ** وَأعدُكِ أَنْ لَن أُضِلَّ السَّبيلا <br>
+خَيالُكِ لا يَترُكُ جَفني لحظة ** وَاسمُكِ عِطري الَّذي لا يَزالا <br>
+جَمالُكِ سِحرٌ يُجِنُّ العُقولَ ** وَحُبُّكِ أصبَحَ عِندي كَمالا <br>
+أَراكِ في كُلِّ شَيءٍ حَولي ** كَأنَّكِ جَنَّةُ خُلدٍ حِيالا <br>
+إذا غِبتِ عنّي يَضيقُ المَكانُ ** وَأَغدو وحيداً أسيرَ الهيالا <br>
+أنا طَوعُ أَمرِكِ يا سَيِّدتي ** أُقدِّمُ قَلبي لَدَيكِ قُبالا <br>
+أَحَبَّكِ قَلبي بِصِدقٍ عَميقٍ ** وَصِرتِ لِعَيني النَّدى وَالشَّلالا <br>
+جَمالُكِ لَيسَ لَهُ مُنتَهىً ** وَحُبُّكِ زادي الَّذي لا يُقالا <br>
+أرى في عُيونِكِ سِحرَ الحَياةِ ** وَأشعرُ بِأَنِّي مَلَكتُ النّوالا <br>
+لَكِ اللهُ حافِظُ هذا الجَمالِ ** وَأنتِ لِقَلبي اِبتِسامُ الجَلالا <br>
+أُعاهِدُكِ أن أصونَ الهَوى ** وَأبقى مُحِبّاً لكِ في السِّجالا <br>
+فأنتِ الأميرةُ في عالَمي ** وَأنتِ لِعَيني المَدى وَالمَثالا <br>
+حَياتي بِدُونِكِ لا قِيمَةَ لَها ** وَأنتِ الَّتي أَصبَحتِ المآلا <br>
+أَحَبَّكِ حُبّاً تَعَدّى الحدودَ ** وَأَصبَحَ في الرُّوحِ سِحراً حَلالا <br>
+جَمالُكِ فَوقَ وصوفِ اللُّغاتِ ** وَحُسنُكِ يَهزِمُ ضَربَ المُحالا <br>
+أعِيذُ جَمالَكِ مِن كُلِّ عَينٍ ** وَأدعو لِوَصلِكِ دَوماً تَعالى <br>
+فَكوني لِقَلبي هَواهُ الأبيدَ ** وَكوني لِعُمري الضِّياءَ المَآلا
+</div>
+<div class="message"id="msg19">
+    بحبك 💗🥺<br>
+    بعشقك🥺💗<br>
+    بموووووووووت فيييييككككككييييي💗💗💗💗💗💗💗💗💗🥺🥺🥺<br>
+    ياااا روووحححححييييي 💗💗💗💗<br>
     </div>
 
+    <div class="message"id="msg20">
+اللهم في هذه الساعه المباركة اني أسألك أن تحفظ حلولتي وتبعد عنها كل الشباب يارب الا انا 🥺
+اللهم ابعد عنا الزعل يارب ويباركلنا بحبنا يااارب وما يفرق بيننا يارب ويزيد حبي الك ويزيد حبك الي 
+ويرزقني ياها ويجعلها من نصيبي ويجعلني من نصيبها ويوفقها وينجحها بدراستها يارب 🥹🥹امين يارب العالمين 🥺🥺🥺🥺🥺 اللهم صل على سيدنا محمد
+اللهم صل على سيدنا محمد
+اللهم صل على سيدنا محمد
+اللهم في هذه الساعه المباركة تقبل مني دعائي يا مجيب الدعاء
+اللهم اني احببتها فاكتبها لي ومن نصيبي يارب اللهم لا تجعل شاب يقربها سواي ولا تجعل فتاة تقربني سواها يارب واحفظها لي وازرع في قلبي حبا شديدا لها يارب وازل همها واجب دعائها ولا تجعل لها مطلب الا اجبته يارب اللهم احفظها بحفظك وارعاها بعينك التي لا تنام اللهم وفقها في دراستها يارب واسعدها وافرح قلبها يارب اللهم اني احببتها حبا شديدا فاجعلها لي ونصيبي وقدري وزوجتي ومستقبلي يارب اللهم لا تفرق بيننا ولا تجعل بيننا خصام يارب ولا نزاع ولا فراق يارب
+اميييييين يااااارببب 🥹💕💞💕💞💕💞💕💞
+اللهم صل على سيدنا محمد
+</div>
+
+</div>
     <script>
-        const targetDate = new Date();
-        targetDate.setHours(24, 0, 0, 0); 
+    // 1. تحديد الهدف الساعة 12 بالليل بطريقتك الأصلية
+    var targetDate = new Date();
+    targetDate.setHours(24, 0, 0, 0); 
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = targetDate - now;
 
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("countdown").innerHTML = 
-                (hours < 10 ? "0":"") + hours + ":" + (minutes < 10 ? "0":"") + minutes + ":" + (seconds < 10 ? "0":"") + seconds;
+        document.getElementById("countdown").innerHTML = 
+            (hours < 10 ? "0" : "") + hours + ":" + 
+            (minutes < 10 ? "0" : "") + minutes + ":" + 
+            (seconds < 10 ? "0" : "") + seconds;
 
-            if (distance < 0) {
-                clearInterval(timerInterval);
-                startSurpriseEffect();
-            }
-        }
-
-        function startSurpriseEffect() {
-            const body = document.getElementById("main-body");
-            // إظهار الستارة فوق المؤقت أولاً
-            body.classList.add("start-curtain");
+        // 2. لما يخلص الوقت
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "00:00:00";
             
-            // ثم فتحها بعد أجزاء من الثانية
-            setTimeout(() => {
-                body.classList.add("open");
+            // تشغيل الستارة (تأكد إن الـ CSS تبعها موجود)
+            document.body.classList.add("start-curtain");
+            
+            setTimeout(function() {
+                document.body.classList.add("open-curtain");
                 
-                setTimeout(() => {
+                setTimeout(function() {
                     document.getElementById("timer-screen").style.display = "none";
                     document.getElementById("content-screen").style.display = "flex";
-                    document.body.style.overflow = "auto";
 
-                    for(let i=1; i<=17; i++) {
-                        setTimeout(() => {
-                            let m = document.getElementById("msg"+i);
+                    // إظهار الرسائل الـ 20 بالترتيب
+                    for (let i = 0; i <= 20; i++) {
+                        setTimeout(function() {
+                            let m = document.getElementById("msg" + i);
                             if(m) m.classList.add("show");
-                        }, i * 250);
+                        }, i * 400);
                     }
-                }, 1000);
-            }, 100);
+                }, 1000); // وقت فتح الستارة
+            }, 500); // تأخير بسيط قبل الفتح
         }
+    }, 1000);
+</script>
 
-        const timerInterval = setInterval(updateTimer, 1000);
-        updateTimer();
-    </script>
 </body>
 </html>
