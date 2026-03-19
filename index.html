@@ -179,7 +179,8 @@
     <script>
     // 1. تحديد الهدف الساعة 12 بالليل بطريقتك الأصلية
     var targetDate = new Date();
-    targetDate.setHours(24, 0, 0, 0); 
+ // بيأخد الوقت هسا وبزيد عليه ساعتين بالظبط
+targetDate.setHours(targetDate.getHours() + 2); 
 
     var x = setInterval(function() {
         var now = new Date().getTime();
