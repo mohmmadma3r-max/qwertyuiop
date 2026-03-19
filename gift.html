@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفاجأة خاصة جداً</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            min-height: 100%;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #ffeef2;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* شاشة المؤقت */
+        #timer-screen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #d63384;
+            background-color: #ffeef2;
+            position: relative;
+            z-index: 1; /* جعل المؤقت في المقدمة */
+        }
+
+        #countdown { 
+            font-size: 3.5rem; 
+            font-weight: bold; 
+            margin-top: 20px;
+        }
+
+        /* تأثير الستارة */
+        .curtain-part {
+            position: fixed;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, #ffafbd, #ffc3a0);
+            z-index: -1; /* مخفية خلف المؤقت في البداية */
+            transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
+            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+        }
+        #left-curtain { left: 0; }
+        #right-curtain { right: 0; }
+
+        /* عند تفعيل الستارة تصبح في المقدمة ثم تفتح */
+        .start-curtain #left-curtain, .start-curtain #right-curtain {
+            z-index: 9999;
+        }
+        .open #left-curtain { transform: translateX(-100%); }
+        .open #right-curtain { transform: translateX(100%); }
+
+        /* شاشة المحتوى */
+        #content-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 15px;
+            background: linear-gradient(180deg, #ffeef2, #ffafbd);
+            min-height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .message {
+            width: 90%;
+            max-width: 550px;
+            font-size: 1.3rem;
+            color: #4a4a4a;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 25px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .message.show { opacity: 1; transform: translateY(0); }
+
+        #msg17 { text-align: right; white-space: pre-wrap; font-size: 1.1rem; border-right: 5px solid #ff4d6d; }
+        .heart { font-size: 60px; animation: beat 1s infinite; margin-bottom: 30px; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+    </style>
+</head>
+<body id="main-body">
+
+    <div id="left-curtain" class="curtain-part"></div>
+    <div id="right-curtain" class="curtain-part"></div>
+
+    <div id="timer-screen">
+        <div class="heart" style="font-size: 40px;">💖</div>
+        <h2>انتظري المفاجأة بعد...</h2>
+        <div id="countdown">00:00:00</div>
+    </div>
+
+    <div id="content-screen">
+        <div class="heart">❤️</div>
+        <div class="message" id="msg1">كل عام وانتي عيدي 🥺💓</div>
+        <div class="message" id="msg2">كل عام وانتي عمري 🥺💓</div>
+        <div class="message" id="msg3">كل عام وانتي في قلبي 🥺💓</div>
+        <div class="message" id="msg4">كل عام وانتي حياتي 🥺💓</div>
+        <div class="message" id="msg5">كل عام وانتي حبي الاول والاخير 🥺💓</div>
+        <div class="message" id="msg6">كل عام وانتي حبيبتي 🥺💓</div>
+        <div class="message" id="msg7">كل عام وانتي روحي 🥺💓</div>
+        <div class="message" id="msg8">كل عام وانتي عسولتي 🥺💓</div>
+        <div class="message" id="msg10">كل عام وانتي نعوستي 🥺💓</div>
+        <div class="message" id="msg11">كل عام وانتي عيوني 🥺💓</div>
+        <div class="message" id="msg12">كل عام وانتي وانا احبك 🥺💓</div>
+        <div class="message" id="msg13">كل عام وانتي اعشقك اكثر واكثر 🥺💓</div>
+        <div class="message" id="msg14">كل عام وانتي سالمة 🥺💓</div>
+        <div class="message" id="msg15">كل عام وانتي وانتي معي 🥺💓</div>
+        <div class="message" id="msg16">بعرف ممكن تكون بسيطة شوي بس انه والله حاب اهديكي اكثر من موقع او صورة او فيديو بس انه مو قادر 😔 بس ان شاء الله يارب انه بقدر بالمستقبل وبعرف انه الي فترة بزعلك كثير بس والله العظيم ما بكون قاصد راح تسالي حالك ليش بحكي هيك بحكي عشان زعلتك الهدية هاي من هون راح تبلش</div>
+        <div class="message" id="msg17">​إلى من سرقت قلبي بابتسامتها، وإلى من جعلت لأيامي معنىً لم أعرفه من قبل..
+إلى تلك الروح التي تسكنني، وتشاركني كل نبضة، وكل شهيق وزفير.
+كل عام وأنتِ النبض الذي يسكن صدري، والروح التي تمدني بالحياة والقوة.
+أنتِ لستِ فقط حبيبتي، أنتِ عيدي، واكتفائي، وسر سعادتي الأبدي الذي لا ينتهي.
+معكِ تعلمت أن الحب ليس مجرد كلمة، بل هو أمان، واحتواء، ووطن أسكن إليه.
+أنتِ النور الذي يضيء عتمة أيامي، واللحن الهادئ الذي يطرد ضجيج العالم من حولي.
+كلما نظرت إلى عينيكِ، وجدت فيهما تاريخي ومستقبلي، ووجدت نفسي التي ضاعت مني.
+أنتِ المعجزة التي سأظل أشكر الله عليها في كل سجدة، وفي كل لحظة امتنان.
+يا من جعلتِ قلبي يزهر في خريف العمر، ويغني في صمت الليل الطويل.
+أحبكِ فوق الحب حباً، وأعشقكِ بقلب طفل لا يرى في هذا الكون سواكِ.
+أنتِ القصيدة التي لم يكتبها شاعر، واللوحة التي عجز عن رسمها أعظم الفنانين.
+في وجودكِ، تذوب كل الهموم، وتصبح الصعاب مجرد جسور نعبرها سوياً نحو الفرح.
+أنتِ ملجئي حين تضيق بي الدنيا، وأنتِ جنتي التي وهبني إياها القدر على الأرض.
+كل عام وأنتِ بطلة حكاياتي، وسيدة قصر أحلامي، والملكة المتوجة على عرش قلبي.
+أعدكِ أن أظل لكِ السند الذي لا يميل، والحبيب الذي لا يتغير مهما طال الزمان.
+سأبقى أحبكِ حتى تشيب الأماني، وحتى يتوقف النبض، وحتى نلتقي في عالم آخر.
+أنتِ لستِ امرأة عابرة، أنتِ قدر كُتب لي ليكون أجمل ما حدث في حياتي كلها.
+يا من تملكين رقّة الورد، وصلابة الجبال في دعمي، وطهر الغيم في عطائكِ.
+وجودكِ معي هو العيد، وضحكتكِ هي الجائزة التي أنتظرها في نهاية كل يوم.
+مهما كتبت من كلمات، ستبقى أبجدية لغتي قاصرة عن وصف ما أشعر به تجاهكِ.
+أحبكِ بكل لغات العالم، وبكل أحاسيس البشر، وبكل تفاصيل الروح المتيمة بكِ.
+أنتِ الفكرة الأولى في صباحي، والدعوة الأخيرة قبل أن أغلق عيني للنوم.
+كل عام وأنتِ نبضي، كل عام وأنتِ كلي، كل عام وأنتِ في قلبي للأبد.
+يا أجمل أقداري، ويا ألطف هدايا السماء، دمتِ لي شيئاً جميلاً لا ينتهي.
+حبي لكِ لا تحده حدود، ولا تصفه سطور، هو بحر عميق لا شاطئ له.
+أنتِ شمس أيامي التي لا تغيب، وقمر لياليّ الذي يؤنس وحدتي دائماً.
+كل نبضة في قلبي تهتف باسمكِ، وكل خلية في جسدي تشتاق إليكِ دائماً.
+أحبكِ لأنكِ أنتِ، ولأنني معكِ أكون النسخة الأجمل والأصدق من نفسي.
+فكوني دائماً بخير، لأن خيري مرتبط بابتسامتكِ، وعيدي يبدأ من عينيكِ.
+كل عام وأنتِ حبيبتي، وكل عام وأنتِ لي كل شيء في هذا الوجود.</div>
+    </div>
+
+    <script>
+        const targetDate = new Date();
+        targetDate.setHours(24, 0, 0, 0); 
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                (hours < 10 ? "0":"") + hours + ":" + (minutes < 10 ? "0":"") + minutes + ":" + (seconds < 10 ? "0":"") + seconds;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                startSurpriseEffect();
+            }
+        }
+
+        function startSurpriseEffect() {
+            const body = document.getElementById("main-body");
+            // إظهار الستارة فوق المؤقت أولاً
+            body.classList.add("start-curtain");
+            
+            // ثم فتحها بعد أجزاء من الثانية
+            setTimeout(() => {
+                body.classList.add("open");
+                
+                setTimeout(() => {
+                    document.getElementById("timer-screen").style.display = "none";
+                    document.getElementById("content-screen").style.display = "flex";
+                    document.body.style.overflow = "auto";
+
+                    for(let i=1; i<=17; i++) {
+                        setTimeout(() => {
+                            let m = document.getElementById("msg"+i);
+                            if(m) m.classList.add("show");
+                        }, i * 250);
+                    }
+                }, 1000);
+            }, 100);
+        }
+
+        const timerInterval = setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
